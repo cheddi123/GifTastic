@@ -2,6 +2,8 @@
 var animalArray = ["dog", "cat"];
 var buttonCreated;
 var isSubmitted = false;
+var isStillImage=true;
+var isClicked=false;
 
 function initializer(){
     $("#animalName").empty();
@@ -37,7 +39,7 @@ $("#submit").on("click", function (event) {
 })
 
 
-$(document).on("click",".animal", function(){
+$(document).on("click","#animalName .animal", function(){
     
     var animal = $(this).attr("data_animal");
 
@@ -54,10 +56,11 @@ $(document).on("click",".animal", function(){
       .then(function(response){
           console.log(response);
           console.log(queryURL)
-          //creating div to display animals
-          
-            
-          var ratings = response.data
+          var imageArray=[];
+          var ratings = response.data;
+
+          // empty the old display before loading the new images when clicked
+          $("#images").empty(); 
           for(var j=0;j<ratings.length;j++){
               var animalDiv = $("<div class='animal m-2'>");
               animalDiv.css({"display":"inline-block","text-align":"center"})
@@ -65,14 +68,19 @@ $(document).on("click",".animal", function(){
                console.log("yes")
               // variable to hold the images
           var stillImage = $("<img>").attr("src", ratings[j].images.fixed_height_still.url);
-          var 
-
+          var animateImage = $("<img>").attr("src", ratings[j].images.fixed_height.url);
           var textRating = $("<h3>").text( "Rating:  " + ratings[j].rating);
-
-           animalDiv.append(textRating, stillImage);
-           $("#images").append(animalDiv)
+           animalDiv.append(textRating,stillImage);
+            imageArray.push(animalDiv);
+            $("#images").append(imageArray);
+           console.log(imageArray.length)
           }
+          
+               
+          if(isStillImage){
 
+
+          }
           
         
 
