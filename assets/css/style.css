@@ -1,3 +1,13 @@
 #images{
     display:inline-block;
+    color: aliceblue;
+}
+
+body{
+    background-image:url("https://i.stack.imgur.com/jGlzr.png");
+    
+}
+
+#label{
+    color: aliceblue;
 }
