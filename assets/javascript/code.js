@@ -1,15 +1,14 @@
 
-var animalArray = ["dog", "cat","rat","parrot"];
+var animalArray = ["dog", "cat", "rat", "parrot"];
 var buttonCreated;
 var isSubmitted = false;
 var isStillImage = true;
-var isClicked = false;
 
 function initializer() {
-    $("#animalName").empty();
-
+    $("#animalName").empty(); // empty out the old images before the new images are displayed
+    // for loop to dynamically display the array and add properties to elements of the array
     for (var i = 0; i < animalArray.length; i++) {
-        buttonCreated = $("<button>");
+        buttonCreated = $("<button>"); // create button tag
         buttonCreated.addClass("btn btn-info m-2 animal");
         buttonCreated.text(animalArray[i]);
         buttonCreated.attr("data_animal", animalArray[i]);
@@ -19,7 +18,7 @@ function initializer() {
 
 }
 
-initializer();
+initializer(); // function call to start loadig the html page
 
 
 // submit button to append the input name to the array
@@ -38,9 +37,6 @@ $("#submit").on("click", function (event) {
     } else { isSubmitted; }
 })
 
-//  var stillImage;
-//  var animateImage;
-var textRating;
 
 $(document).on("click", "#animalName .animal", function () {
 
@@ -64,11 +60,11 @@ $(document).on("click", "#animalName .animal", function () {
             // empty the old display before loading the new images when clicked
             $("#images").empty();
             for (var j = 0; j < ratings.length; j++) {
-                 var gifDiv = $("<span>")
-                     gifDiv.css({ "display": "inline-block", "text-align": "center" })
+                var gifDiv = $("<span>")
+                gifDiv.css({ "display": "inline-block", "text-align": "center" })
                 var animalImage = $("<img>");
                 animalImage.addClass("animal ");
-            
+
                 console.log(ratings.length)
                 console.log("yes")
                 // variable to hold the images
@@ -81,10 +77,9 @@ $(document).on("click", "#animalName .animal", function () {
                 animalImage.attr("data-animate", y); //animate gif
 
 
-                textRating = $("<h3>").text("Rating:  " + ratings[j].rating);
-                gifDiv.append(textRating,animalImage)
-                // imageArray.push(animalDiv);
-                $("#images").append(gifDiv);
+                var textRating = $("<h3>").text("Rating:  " + ratings[j].rating);
+                gifDiv.append(textRating, animalImage)
+                $("#images").append(gifDiv); // images are displayed when named button is clicked
 
             }
 
@@ -94,7 +89,7 @@ $(document).on("click", "#animalName .animal", function () {
 
 //onclick event on the images
 $(document).on("click", "#images .animal", function () {
-    var state = $(this).attr("data-state");
+    var state = $(this).attr("data-state"); // variable to reference the data-state "still"
     console.log(state)
     if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
